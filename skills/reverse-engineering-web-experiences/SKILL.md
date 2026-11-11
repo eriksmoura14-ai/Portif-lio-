@@ -119,3 +119,33 @@ Jamais chamar C ou D de engenharia reversa concluída.
 - Priorizar o estudo do sistema de renderização e fluxo de dados; depois investigar editores Tools, Textures, Shaders e Mockups.
 - O objetivo final é biblioteca de experiências imersivas independentes com prévias reais, não um editor genérico.
 - Status inicial: REA sem alvo CDP acessível; não alegar análise de bundle oficial.
+
+
+## Pesquisa comparativa de repositórios de engenharia reversa (fase de ferramentas)
+Repositórios confirmados no GitHub:
+- `NationalSecurityAgency/ghidra`: análise estática, decompilação e referências cruzadas de executáveis; útil para binários, não como primeira opção em sites.
+- `radareorg/radare2`: análise programável de binários, strings, CFG e disassembly.
+- `rizinorg/rizin`: framework modular de análise de baixo nível.
+- `angr/angr`: execução simbólica e análise de caminhos em programas compilados.
+- `HumanSecurity/restringer`: desofuscação de JavaScript; aplicar somente a scripts que podem ser legalmente analisados.
+- `BabylonJS/Spector.js`: captura e inspeção de frames WebGL, shaders, draw calls e recursos gráficos.
+- `microsoft/playwright`: automação reproduzível, screenshots, traces, eventos e teste de responsividade.
+- `benvanik/WebGL-Inspector`: ferramenta histórica de inspeção WebGL; conferir manutenção antes de adotar.
+- `alphaSeclab/awesome-reverse-engineering`: catálogo comunitário de ferramentas; validar individualmente.
+
+### Matriz de seleção por alvo
+| Alvo | Ferramentas prioritárias | Não começar por |
+|---|---|---|
+| SPA React/Next/Vite | DevTools, CDP, Playwright, REA web bundle | Ghidra |
+| JS minificado/ofuscado | source maps públicos, AST, REstringer, REA | angr |
+| WebGL/Three.js | Spector.js, shaders, Performance, REA | Apktool |
+| WebAssembly | wasm tooling, browser devtools, análise de binários compatíveis | somente CSS inspector |
+| Electron/ASAR | REA JS application, inspeção ASAR, CDP | somente screenshots |
+| APK Android | Apktool, JADX, REA Android quando alvo estiver disponível | WebGL inspector |
+| PE/ELF/Mach-O | Ghidra, Rizin/radare2, angr quando necessário | Playwright |
+
+### Regra de adoção de ferramentas
+Para cada projeto encontrado: ler README e licença; registrar versão, manutenção, instalação, capacidades, limites, segurança, saída reproduzível e teste mínimo. Um repositório GitHub existente **não comprova** que foi executado nem que pode ser redistribuído. Só adicionar uma ferramenta à pipeline após teste de compatibilidade.
+
+### Gate de integração com REA
+REA não é sinônimo de acesso universal ao navegador, ao GitHub ou ao computador do usuário. Selecionar a capacidade específica do REA e confirmar alvo, provider e evidência antes de analisar. Se falhar, registrar erro exato e preparar alternativa técnica. Nunca afirmar captura inexistente.
